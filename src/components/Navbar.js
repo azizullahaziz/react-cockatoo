@@ -1,6 +1,6 @@
 import React from "react"
 
-function Navbar({ activeMenu, activateTodoMenu }) {
+function Navbar() {
   return (
     <>
       <nav>
@@ -8,14 +8,12 @@ function Navbar({ activeMenu, activateTodoMenu }) {
           <h4>Todo App</h4>
         </div>
         <ul className="nav-links">
-          <li className={activeMenu === "home" ? "active" : ""}>
+          <li>
             <a href="/">Home</a>
           </li>
 
-          <li className={activeMenu === "todo" ? "active" : ""}>
-            <a href="/todo" onClick={activateTodoMenu}>
-              Todo
-            </a>
+          <li>
+            <a href="/todo">Todo</a>
           </li>
         </ul>
       </nav>

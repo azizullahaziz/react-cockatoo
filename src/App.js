@@ -1,7 +1,7 @@
 import React from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import TodoContainer from "./components/TodoContainer"
-import style from "./App.css"
+import "./App.css"
 import Home from "./components/Home"
 
 function App() {

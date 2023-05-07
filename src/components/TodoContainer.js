@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react"
 import TodoList from "./TodoList"
 import AddTodoForm from "./AddTodoForm"
 import TodoHeader from "./TodoHeader"
+import Navbar from "./Navbar"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
-import Navbar from "./Navbar"
 import PropTypes from "prop-types"
 
 function TodoContainer({ tableName }) {
@@ -63,11 +63,6 @@ function TodoContainer({ tableName }) {
       .catch((error) => console.log(error))
   }
 
-  // function removeTodo(id) {
-  //   let filtered = todoList.filter((x) => x.id !== id)
-  //   setTodoList(filtered)
-  // }
-
   function removeTodo(id) {
     fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableName}/${id}`, {
       method: "DELETE",
@@ -88,16 +83,16 @@ function TodoContainer({ tableName }) {
       if (sortOrder === "desc") {
         if (sortItem === "title") {
           return a.fields.Title.localeCompare(b.fields.Title)
-        } else if (sortItem === "creationDate") {
-          return new Date(a.createdTime) - new Date(b.createdTime)
         }
-      } else {
-        if (sortItem === "title") {
-          return b.fields.Title.localeCompare(a.fields.Title)
-        } else if (sortItem === "creationDate") {
-          return new Date(b.createdTime) - new Date(a.createdTime)
-        }
+
+        return new Date(a.createdTime) - new Date(b.createdTime)
       }
+
+      if (sortItem === "title") {
+        return b.fields.Title.localeCompare(a.fields.Title)
+      }
+
+      return new Date(b.createdTime) - new Date(a.createdTime)
     })
     setTodoList(sortedTodoList)
     setSortOrder(sortOrder === "asc" ? "desc" : "asc")
